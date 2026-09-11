@@ -1,0 +1,27 @@
+.checkout-page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.checkout-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+  max-width: 480px;
+  padding: 32px;
+  width: 100%;
+}
+
+.checkout-card h1 {
+  font-size: 24px;
+  margin: 0 0 8px;
+}
+
+.checkout-card p {
+  color: #6b7280;
+  margin: 0 0 24px;
+}
