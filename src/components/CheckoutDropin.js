@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { AdyenCheckout, Card, Dropin, PayPal } from "@adyen/adyen-web";
 
 export default function CheckoutDropin() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [error, setError] = useState<string | null>(null);
+  const containerRef = useRef(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     let active = true;
-    let dropin: Dropin | undefined;
+    let dropin;
 
     async function initialiseCheckout() {
       try {

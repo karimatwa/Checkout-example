@@ -8,7 +8,7 @@ From the repository root:
 
 ```bash
 npm install
-npm run dev:checkout
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -16,7 +16,7 @@ Open [http://localhost:3000](http://localhost:3000).
 To use a different port:
 
 ```bash
-npm run dev --workspace @adyen-demo/checkout -- --port 3003
+npm run dev -- --port 3003
 ```
 
 ## Configuration
@@ -42,9 +42,9 @@ Payment methods appear only when they are enabled and eligible for the configure
 
 ## How it works
 
-1. `app/page.tsx` renders the checkout page.
-2. `src/components/CheckoutDropin.tsx` requests a session from `POST /api/sessions`.
-3. `app/api/sessions/route.ts` loads `.env` and calls Adyen's Checkout Sessions API with a fixed EUR 10.00 amount.
+1. `app/page.js` renders the checkout page.
+2. `src/components/CheckoutDropin.js` requests a session from `POST /api/sessions`.
+3. `app/api/sessions/route.js` loads `.env` and calls Adyen's Checkout Sessions API with a fixed EUR 10.00 amount.
 4. The browser initializes Adyen Drop-in with the returned session and client key.
 
 The server generates a unique payment reference for every session. The API response contains only the Adyen session and client key required by the Drop-in. It never exposes the API key.
@@ -52,7 +52,6 @@ The server generates a unique payment reference for every session. The API respo
 ## Validate
 
 ```bash
-npx tsc --noEmit -p apps/checkout/tsconfig.json
-npm run lint --workspace @adyen-demo/checkout
-npm run build --workspace @adyen-demo/checkout
+npm run lint
+npm run build
 ```

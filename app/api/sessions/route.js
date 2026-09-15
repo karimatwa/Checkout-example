@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Client, CheckoutAPI, EnvironmentEnum, Types } from "@adyen/api-library";
+import { Client, CheckoutAPI, EnvironmentEnum } from "@adyen/api-library";
 import { config } from "dotenv";
 import { resolve } from "path";
 
@@ -11,12 +11,7 @@ config({
   quiet: true,
 });
 
-type RequiredEnvironmentVariable =
-  | "API_KEY"
-  | "MERCHANT_ACCOUNT"
-  | "NEXT_PUBLIC_CLIENT_KEY";
-
-function getRequiredEnvironmentVariable(name: RequiredEnvironmentVariable) {
+function getRequiredEnvironmentVariable(name) {
   const value = process.env[name];
   if (!value) {
     throw new Error(`Missing ${name} in .env.sarenza`);
@@ -24,7 +19,7 @@ function getRequiredEnvironmentVariable(name: RequiredEnvironmentVariable) {
   return value;
 }
 
-export async function POST(request: Request) {
+export async function POST(request) {
   try {
     const { returnUrl } = await request.json();
 
@@ -37,7 +32,7 @@ export async function POST(request: Request) {
       environment: EnvironmentEnum.TEST,
     });
     const checkout = new CheckoutAPI(client);
-    const amount: Types.checkout.Amount = { currency: "EUR", value: 1000 };
+    const amount = { currency: "EUR", value: 1000 };
 
     const session = await checkout.PaymentsApi.sessions({
       merchantAccount: getRequiredEnvironmentVariable("MERCHANT_ACCOUNT"),
@@ -46,7 +41,7 @@ export async function POST(request: Request) {
       returnUrl,
       countryCode: "FR",
       shopperLocale: "fr-FR",
-      channel: Types.checkout.CreateCheckoutSessionRequest.ChannelEnum.Web,
+      channel: "Web",
     });
 
     return NextResponse.json({
